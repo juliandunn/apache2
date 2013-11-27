@@ -12,6 +12,8 @@ ServerRoot "<%= node['apache']['dir'] %>"
 LockFile /var/lock/apache2/accept.lock
 <% elsif %w[freebsd].include?(node['platform_family']) -%>
 LockFile /var/log/accept.lock
+<% elsif %w[fedora].include?(node['platform_family']) -%>
+Mutex default
 <% else %>
 LockFile logs/accept.lock
 <% end -%>
@@ -102,6 +104,7 @@ AccessFileName .htaccess
     Deny from all
 </Files>
 
+<% unless %w[fedora].include?(node['platform_family']) -%>
 #
 # DefaultType is the default MIME type the server will use for a document
 # if it cannot otherwise determine one, such as from filename extensions.
@@ -114,6 +117,7 @@ AccessFileName .htaccess
 DefaultType text/plain
 
 
+<% end -%>
 #
 # HostnameLookups: Log the names of clients or just their IP addresses
 # e.g., www.apache.org (on) or 204.62.129.132 (off).
