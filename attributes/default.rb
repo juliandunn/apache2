@@ -169,8 +169,8 @@ default['apache']['proxy']['allow_from'] = 'none'
 
 if node['platform'] == 'fedora'
   default['apache']['default_modules'] = %w[
-    mpm_prefork unixd access_compat status alias auth_basic authn_file authz_groupfile authz_host
-    authz_user autoindex dir env mime negotiation setenvif filter
+    mpm_prefork unixd access_compat status alias auth_basic authn_core authn_file authz_groupfile
+    authz_host authz_user autoindex dir env mime negotiation setenvif filter
   ]
 else
   default['apache']['default_modules'] = %w[
